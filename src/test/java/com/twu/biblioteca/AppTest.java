@@ -18,7 +18,7 @@ public class AppTest {
            System.setOut(console);
         }
         assertEquals(String.format(
-              "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore%n%nAsymmetry By Lisa Halliday%nThe Great Believers By Rebecca Makkai%n"),
+              "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.%n%nAsymmetry | Lisa Halliday | 2018%nThe Great Believers | Rebecca Makkai | 2018%n"),
               bytes.toString());
     }
 }
