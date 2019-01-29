@@ -62,7 +62,17 @@ public class AppTest {
       String output = outBytes.toString();
       String[] lines = output.split("\\r?\\n");
 
+      assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 4]);
+    }
+    @Test public void testQuitOption() {
+      inBytes = new ByteArrayInputStream("2".getBytes());
+      System.setIn(inBytes);
 
-      assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 3]);
+      App.main(new String[0]);
+
+      String output = outBytes.toString();
+      String[] lines = output.split("\\r?\\n");
+
+      assertEquals("Bye!", lines[lines.length - 1]);
     }
 }

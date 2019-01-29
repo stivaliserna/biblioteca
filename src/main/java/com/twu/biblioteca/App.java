@@ -17,16 +17,20 @@ public class App {
     private static void mainMenu(Biblioteca library) {
         System.out.println("Select an option:");
         System.out.println("  1) List all books");
+        System.out.println("  2) Quit");
 
         Scanner scanner = new Scanner(System.in);
 
-        while(scanner.hasNext()) {
+        loop: while(scanner.hasNext()) {
             int command = scanner.nextInt();
     
             switch (command) {
                 case 1:
                     showBooks(library);
                     break;
+                case 2:
+                    System.out.println("Bye!");
+                    break loop;
                 default:
                 System.out.println("Wrong option! Please select a valid one.");
                 mainMenu(library);
