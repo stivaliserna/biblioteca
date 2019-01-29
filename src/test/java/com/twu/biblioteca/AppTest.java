@@ -52,4 +52,17 @@ public class AppTest {
          assertEquals("Asymmetry | Lisa Halliday | 2018", lines[lines.length - 2]);
          assertEquals("The Great Believers | Rebecca Makkai | 2018", lines[lines.length - 1]);
     }
+
+    @Test public void testInvalidOption() {
+      inBytes = new ByteArrayInputStream("3".getBytes());
+      System.setIn(inBytes);
+
+      App.main(new String[0]);
+
+      String output = outBytes.toString();
+      String[] lines = output.split("\\r?\\n");
+
+
+      assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 3]);
+    }
 }

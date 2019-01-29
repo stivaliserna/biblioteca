@@ -27,6 +27,9 @@ public class App {
                 case 1:
                     showBooks(library);
                     break;
+                default:
+                System.out.println("Wrong option! Please select a valid one.");
+                mainMenu(library);
             }
         }
         scanner.close();
