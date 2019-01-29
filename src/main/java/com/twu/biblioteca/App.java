@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
         Biblioteca library = new Biblioteca();
@@ -7,6 +9,30 @@ public class App {
         library.addBook(new Book("Asymmetry", "Lisa Halliday", "2018"));
         library.addBook(new Book("The Great Believers", "Rebecca Makkai", "2018"));
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.");
+        System.out.println();
+
+        mainMenu(library);
+    }
+    
+    private static void mainMenu(Biblioteca library) {
+        System.out.println("Select an option:");
+        System.out.println("  1) List all books");
+
+        Scanner scanner = new Scanner(System.in);
+
+        while(scanner.hasNext()) {
+            int command = scanner.nextInt();
+    
+            switch (command) {
+                case 1:
+                    showBooks(library);
+                    break;
+            }
+        }
+        scanner.close();
+    }
+
+    private static void showBooks(Biblioteca library) {
         System.out.println(library.toString());
     }
 }

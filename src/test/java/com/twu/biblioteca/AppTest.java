@@ -4,21 +4,52 @@
 package com.twu.biblioteca;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.*;
 
 public class AppTest {
+   private OutputStream outBytes;
+   private InputStream inBytes;
+
+   private final InputStream sysIn = System.in;
+   private final PrintStream sysOut = System.out;
+
+   @BeforeEach public void beforeEach() {
+      outBytes = new ByteArrayOutputStream();
+      System.setOut(new PrintStream(outBytes));
+   }
+
+   @AfterEach public void afterEach() {
+      System.setIn(sysIn);
+      System.setOut(sysOut);
+   }
+
     @Test public void testWelcomeMessage() {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        PrintStream console = System.out;
-        try {
-           System.setOut(new PrintStream(bytes));
-           App.main(new String[0]);
-        } finally {
-           System.setOut(console);
-        }
-        assertEquals(String.format(
-              "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.%n%nAsymmetry | Lisa Halliday | 2018%nThe Great Believers | Rebecca Makkai | 2018%n"),
-              bytes.toString());
+         inBytes = new ByteArrayInputStream("".getBytes());
+         System.setIn(inBytes);
+
+         App.main(new String[0]);
+
+         String output = outBytes.toString();
+         String[] lines = output.split("\\r?\\n");
+
+         assertEquals("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.", lines[0]);
+         assertEquals("Select an option:", lines[2]);
+         assertEquals("  1) List all books", lines[3]);
+    }
+    @Test public void testBookList() {
+         inBytes = new ByteArrayInputStream("1".getBytes());
+         System.setIn(inBytes);
+
+         App.main(new String[0]);
+
+         String output = outBytes.toString();
+         String[] lines = output.split("\\r?\\n");
+
+
+         assertEquals("Asymmetry | Lisa Halliday | 2018", lines[lines.length - 2]);
+         assertEquals("The Great Believers | Rebecca Makkai | 2018", lines[lines.length - 1]);
     }
 }
