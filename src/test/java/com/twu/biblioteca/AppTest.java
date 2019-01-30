@@ -96,4 +96,18 @@ public class AppTest {
 
       assertEquals("  3) Quit", lines[lines.length - 1]);
     }
+
+    @Test public void testCheckoutSuccessMessage() {
+      setInput(
+         "2" +
+         ENTER +
+         "asy"
+      );
+
+      App.main(new String[0]);
+
+      String[] lines = getOutputLines();
+
+      assertEquals("Thank you! Enjoy the book.", lines[lines.length - 3]);
+    }
 }

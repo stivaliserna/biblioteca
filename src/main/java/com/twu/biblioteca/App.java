@@ -72,6 +72,7 @@ public class App {
 
         if (bookList.size() == 1) {
             System.out.println();
+            System.out.println("Thank you! Enjoy the book.");
             bookList.get(0).checkoutBook();
             goBack();
         } else {
