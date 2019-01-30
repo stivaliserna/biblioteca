@@ -7,7 +7,6 @@ import java.util.Collections;
 public class App {
     private static Biblioteca library;
     private static Scanner scanner;
-
     public static void main(String[] args) {
         // Initialize the library.
         library = new Biblioteca();
@@ -105,6 +104,7 @@ public class App {
         if (bookList.size() == 1) {
             System.out.println();
             bookList.get(0).returnBook();
+            System.out.println("Thank you for returning the book!");
             goBack();
         } else {
             System.out.println();

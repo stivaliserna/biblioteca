@@ -147,4 +147,18 @@ public class AppTest {
 
       assertEquals("  4) Quit", lines[lines.length - 1]);
     }
+
+    @Test public void testReturnSuccessMessage() {
+      setInput(
+         "3" +
+         ENTER +
+         "asy"
+      );
+
+      App.main(new String[0]);
+
+      String[] lines = getOutputLines();
+
+      assertEquals("Thank you for returning the book!", lines[lines.length - 3]);
+    }
 }
