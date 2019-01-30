@@ -129,7 +129,7 @@ public class AppTest {
 
       String[] lines = getOutputLines();
 
-      assertEquals("Sorry, that book is not available!", lines[lines.length - 2]);
+      assertEquals("Sorry, that book is not available!", lines[lines.length - 3]);
     }
 
     @Test public void testReturnMenu() {
@@ -160,5 +160,19 @@ public class AppTest {
       String[] lines = getOutputLines();
 
       assertEquals("Thank you for returning the book!", lines[lines.length - 3]);
+    }
+
+    @Test public void testReturnUnsuccessfulMessage() {
+      setInput(
+         "3" +
+         ENTER +
+         "hue"
+      );
+
+      App.main(new String[0]);
+
+      String[] lines = getOutputLines();
+
+      assertEquals("That is not a valid book to return.", lines[lines.length - 3]);
     }
 }

@@ -80,7 +80,7 @@ public class App {
         } else if (!Collections.disjoint(bookList, library.unAvailableBooks()) == true) {
             System.out.println();
             System.out.println("Sorry, that book is not available!");
-            checkoutMenu();
+            goBack();
         } else {
             System.out.println();
             System.out.println("Be more specific, there are " + bookList.size() + " results.");
@@ -106,10 +106,13 @@ public class App {
             bookList.get(0).returnBook();
             System.out.println("Thank you for returning the book!");
             goBack();
+        } else if (bookList.size() == 0) {
+            System.out.println("That is not a valid book to return.");
+            goBack();
         } else {
             System.out.println();
             System.out.println("Be more specific, there are " + bookList.size() + " results.");
-            checkoutMenu();
+            returnMenu();
         }
     }
 
