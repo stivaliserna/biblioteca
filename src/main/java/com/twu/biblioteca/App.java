@@ -30,7 +30,8 @@ public class App {
         System.out.println("Select an option:");
         System.out.println("  1) List all books");
         System.out.println("  2) Checkout a book");
-        System.out.println("  3) Quit");
+        System.out.println("  3) Return a book");
+        System.out.println("  4) Quit");
 
         if (!scanner.hasNext()) return;
 
@@ -43,6 +44,9 @@ public class App {
                 checkoutMenu();
                 break;
             case "3":
+                returnMenu();
+                break;
+            case "4":
                 System.out.println("Bye!");
                 break;
             default:
@@ -78,6 +82,30 @@ public class App {
             System.out.println();
             System.out.println("Sorry, that book is not available!");
             checkoutMenu();
+        } else {
+            System.out.println();
+            System.out.println("Be more specific, there are " + bookList.size() + " results.");
+            checkoutMenu();
+        }
+    }
+
+    private static void returnMenu() {
+        System.out.println("Type the name of the book you want to checkout.");
+
+        if (!scanner.hasNext()) return;
+
+        String query = scanner.next();
+
+        List<Book> bookList = library.findAll(query);
+
+        String result = library.formatBooks(bookList);
+
+        System.out.println(result);
+
+        if (bookList.size() == 1) {
+            System.out.println();
+            bookList.get(0).returnBook();
+            goBack();
         } else {
             System.out.println();
             System.out.println("Be more specific, there are " + bookList.size() + " results.");

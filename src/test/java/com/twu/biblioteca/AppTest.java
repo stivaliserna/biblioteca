@@ -47,7 +47,8 @@ public class AppTest {
          assertEquals("Select an option:", lines[2]);
          assertEquals("  1) List all books", lines[3]);
          assertEquals("  2) Checkout a book", lines[4]);
-         assertEquals("  3) Quit", lines[5]);
+         assertEquals("  3) Return a book", lines[5]);
+         assertEquals("  4) Quit", lines[6]);
     }
 
     @Test public void testBookList() {
@@ -57,22 +58,22 @@ public class AppTest {
 
          String[] lines = getOutputLines();
 
-         assertEquals("Asymmetry | Lisa Halliday | 2018", lines[lines.length - 7]);
-         assertEquals("The Great Believers | Rebecca Makkai | 2018", lines[lines.length - 6]);
+         assertEquals("Asymmetry | Lisa Halliday | 2018", lines[lines.length - 8]);
+         assertEquals("The Great Believers | Rebecca Makkai | 2018", lines[lines.length - 7]);
     }
 
     @Test public void testInvalidOption() {
-      setInput("4");
+      setInput("9");
 
       App.main(new String[0]);
 
       String[] lines = getOutputLines();
 
-      assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 5]);
+      assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 6]);
     }
 
     @Test public void testQuitOption() {
-      setInput("3");
+      setInput("4");
 
       App.main(new String[0]);
 
@@ -94,7 +95,7 @@ public class AppTest {
 
       String[] lines = getOutputLines();
 
-      assertEquals("  3) Quit", lines[lines.length - 1]);
+      assertEquals("  4) Quit", lines[lines.length - 1]);
     }
 
     @Test public void testCheckoutSuccessMessage() {
@@ -129,5 +130,21 @@ public class AppTest {
       String[] lines = getOutputLines();
 
       assertEquals("Sorry, that book is not available!", lines[lines.length - 2]);
+    }
+
+    @Test public void testReturnMenu() {
+      setInput(
+         "2" +
+         ENTER +
+         "asy" +
+         ENTER +
+         "Y"
+      );
+
+      App.main(new String[0]);
+
+      String[] lines = getOutputLines();
+
+      assertEquals("  4) Quit", lines[lines.length - 1]);
     }
 }
