@@ -110,4 +110,24 @@ public class AppTest {
 
       assertEquals("Thank you! Enjoy the book.", lines[lines.length - 3]);
     }
+
+    @Test public void testCheckoutUnsuccessfulMessage() {
+      setInput(
+         "2" +
+         ENTER +
+         "asy" +
+         ENTER +
+         "Y" +
+         ENTER +
+         "2" +
+         ENTER +
+         "asy"
+      );
+
+      App.main(new String[0]);
+
+      String[] lines = getOutputLines();
+
+      assertEquals("Sorry, that book is not available!", lines[lines.length - 2]);
+    }
 }

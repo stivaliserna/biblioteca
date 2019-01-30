@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.Collections;
 
 public class App {
     private static Biblioteca library;
@@ -64,17 +65,19 @@ public class App {
 
         List<Book> bookList = library.findAll(query);
 
-        String result = bookList.stream()
-            .map(Book::toString)
-            .reduce("", (String a, String b) -> String.format(a + "%n" + b));
+        String result = library.formatBooks(bookList);
 
         System.out.println(result);
 
-        if (bookList.size() == 1) {
+        if (bookList.size() == 1 && !Collections.disjoint(bookList, library.unAvailableBooks()) == false) {
             System.out.println();
             System.out.println("Thank you! Enjoy the book.");
             bookList.get(0).checkoutBook();
             goBack();
+        } else if (!Collections.disjoint(bookList, library.unAvailableBooks()) == true) {
+            System.out.println();
+            System.out.println("Sorry, that book is not available!");
+            checkoutMenu();
         } else {
             System.out.println();
             System.out.println("Be more specific, there are " + bookList.size() + " results.");
