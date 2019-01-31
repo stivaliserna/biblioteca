@@ -20,27 +20,18 @@ public class Biblioteca {
     }
 
     public List<Book> availableBooks() {
-        return this.books.stream()
-                         .filter(book -> book.getBorrowed() == false)
-                         .collect(Collectors.toList());
+        return this.findAll("", false);
     }
 
     public List<Book> unAvailableBooks() {
-        return this.books.stream()
-                         .filter(book -> book.getBorrowed() == true)
-                         .collect(Collectors.toList());
+        return this.findAll("", true);
     }
 
-    public List<Book> findAll(String query) {
+    public List<Book> findAll(String query, boolean borrowed) {
         return this.books.stream()
+                         .filter(book -> book.getBorrowed() == borrowed)
                          .filter(book -> book.getTitle().toLowerCase().contains(query))
                          .collect(Collectors.toList());
-    }
-
-    public static String formatBooks(List<Book> books) {
-        return books.stream()
-                    .map(Book::toString)
-                    .reduce("", (String a, String b) -> String.format(a + "%n" + b));
     }
 }
 

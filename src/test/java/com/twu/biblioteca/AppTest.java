@@ -138,6 +138,12 @@ public class AppTest {
          ENTER +
          "asy" +
          ENTER +
+         "Y" +
+         ENTER +
+         "3" +
+         ENTER +
+         "asy" +
+         ENTER +
          "Y"
       );
 
@@ -150,6 +156,12 @@ public class AppTest {
 
     @Test public void testReturnSuccessMessage() {
       setInput(
+         "2" +
+         ENTER +
+         "asy" +
+         ENTER +
+         "Y" +
+         ENTER +
          "3" +
          ENTER +
          "asy"

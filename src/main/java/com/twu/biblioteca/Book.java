@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.List;
+
 public class Book {
     private String title;
     private String author;
@@ -31,5 +33,11 @@ public class Book {
 
     public void returnBook() {
         this.borrowed = false;
+    }
+
+    public static String formatBooks(List<Book> books) {
+        return books.stream()
+                    .map(Book::toString)
+                    .reduce("", (String a, String b) -> String.format(a + "%n" + b));
     }
 }

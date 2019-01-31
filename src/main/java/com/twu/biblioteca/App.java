@@ -55,7 +55,7 @@ public class App {
     }
 
     private static void showBooks() {
-        System.out.println(library.formatBooks(library.availableBooks()));
+        System.out.println(Book.formatBooks(library.availableBooks()));
         System.out.println();
     }
 
@@ -66,18 +66,18 @@ public class App {
 
         String query = scanner.next();
 
-        List<Book> bookList = library.findAll(query);
+        List<Book> bookList = library.findAll(query, false);
 
-        String result = library.formatBooks(bookList);
+        String result = Book.formatBooks(bookList);
 
         System.out.println(result);
 
-        if (bookList.size() == 1 && !Collections.disjoint(bookList, library.unAvailableBooks()) == false) {
+        if (bookList.size() == 1 && Collections.disjoint(bookList, library.availableBooks()) == false) {
             System.out.println();
             System.out.println("Thank you! Enjoy the book.");
             bookList.get(0).checkoutBook();
             goBack();
-        } else if (!Collections.disjoint(bookList, library.unAvailableBooks()) == true) {
+        } else if (Collections.disjoint(bookList, library.unAvailableBooks()) == true) {
             System.out.println();
             System.out.println("Sorry, that book is not available!");
             goBack();
@@ -89,15 +89,15 @@ public class App {
     }
 
     private static void returnMenu() {
-        System.out.println("Type the name of the book you want to checkout.");
+        System.out.println("Type the name of the book you want to return.");
 
         if (!scanner.hasNext()) return;
 
         String query = scanner.next();
 
-        List<Book> bookList = library.findAll(query);
+        List<Book> bookList = library.findAll(query, true);
 
-        String result = library.formatBooks(bookList);
+        String result = Book.formatBooks(bookList);
 
         System.out.println(result);
 
