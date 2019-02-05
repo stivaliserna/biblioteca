@@ -1,8 +1,6 @@
 package com.twu.biblioteca;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.Collections;
 
 public class App {
     private static Biblioteca library;
@@ -20,117 +18,8 @@ public class App {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.");
         System.out.println();
 
-        mainMenu();
+        MainMenu.execute(library, scanner);
 
         scanner.close();
-    }
-
-    private static void mainMenu() {
-        System.out.println("Select an option:");
-        System.out.println("  1) List all books");
-        System.out.println("  2) Checkout a book");
-        System.out.println("  3) Return a book");
-        System.out.println("  4) Quit");
-
-        if (!scanner.hasNext()) return;
-
-        switch (scanner.next()) {
-            case "1":
-                showBooks();
-                mainMenu();
-                break;
-            case "2":
-                checkoutMenu();
-                break;
-            case "3":
-                returnMenu();
-                break;
-            case "4":
-                System.out.println("Bye!");
-                break;
-            default:
-                System.out.println("Wrong option! Please select a valid one.");
-                mainMenu();
-        }
-    }
-
-    private static void showBooks() {
-        System.out.println(Book.formatBooks(library.availableBooks()));
-        System.out.println();
-    }
-
-    private static void checkoutMenu() {
-        System.out.println("Type the name of the book you want to checkout.");
-
-        if (!scanner.hasNext()) return;
-
-        String query = scanner.next();
-
-        List<Book> bookList = library.findAll(query, false);
-
-        String result = Book.formatBooks(bookList);
-
-        System.out.println(result);
-
-        if (bookList.size() == 1 && Collections.disjoint(bookList, library.availableBooks()) == false) {
-            System.out.println();
-            System.out.println("Thank you! Enjoy the book.");
-            bookList.get(0).checkoutBook();
-            goBack();
-        } else if (Collections.disjoint(bookList, library.unAvailableBooks()) == true) {
-            System.out.println();
-            System.out.println("Sorry, that book is not available!");
-            goBack();
-        } else {
-            System.out.println();
-            System.out.println("Be more specific, there are " + bookList.size() + " results.");
-            checkoutMenu();
-        }
-    }
-
-    private static void returnMenu() {
-        System.out.println("Type the name of the book you want to return.");
-
-        if (!scanner.hasNext()) return;
-
-        String query = scanner.next();
-
-        List<Book> bookList = library.findAll(query, true);
-
-        String result = Book.formatBooks(bookList);
-
-        System.out.println(result);
-
-        if (bookList.size() == 1) {
-            System.out.println();
-            bookList.get(0).returnBook();
-            System.out.println("Thank you for returning the book!");
-            goBack();
-        } else if (bookList.size() == 0) {
-            System.out.println("That is not a valid book to return.");
-            goBack();
-        } else {
-            System.out.println();
-            System.out.println("Be more specific, there are " + bookList.size() + " results.");
-            returnMenu();
-        }
-    }
-
-    private static void goBack() {
-        System.out.println();
-        System.out.println("Would you like to go back to the main menu? Y/N");
-
-        if (!scanner.hasNext()) return;
-
-        switch (scanner.next()) {
-            case "Y":
-                mainMenu();
-                break;
-            case "N":
-                break;
-            default:
-                System.out.println("Sorry, invalid option.");
-                goBack();
-        }
     }
 }
