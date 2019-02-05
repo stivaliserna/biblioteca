@@ -12,8 +12,10 @@ public class App {
         scanner = new Scanner(System.in);
 
         // Add some books to the library.
-        library.addBook(new Book("Asymmetry", "Lisa Halliday", "2018", false));
-        library.addBook(new Book("The Great Believers", "Rebecca Makkai", "2018", false));
+        library.addItem(new Book("Lisa Halliday", "Asymmetry", "2018", false));
+        library.addItem(new Book("Rebecca Makkai", "The Great Believers", "2018", false));
+        library.addItem(new Movie("Jonathan Demme", "10", "The Silence of the Lambs", "1991", false));
+        library.addItem(new Movie("Alfonso Cuarón", "9", "Roma", "2018", false));
 
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.");
         System.out.println();

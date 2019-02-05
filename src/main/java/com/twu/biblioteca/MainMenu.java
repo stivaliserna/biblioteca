@@ -7,22 +7,31 @@ public class MainMenu {
         System.out.println("  1) List all books");
         System.out.println("  2) Checkout a book");
         System.out.println("  3) Return a book");
-        System.out.println("  4) Quit");
+        System.out.println("  4) List all movies");
+        System.out.println("  5) Checkout a movie");
+        System.out.println("  6) Quit");
 
         if (!scanner.hasNext()) return;
 
         switch (scanner.next()) {
             case "1":
-                ShowBooks.execute(library);
+                ShowItems.execute(library, Book.class);
                 MainMenu.execute(library, scanner);
                 break;
             case "2":
-                CheckoutMenu.execute(library, scanner);
+                CheckoutMenu.execute(library, scanner, Book.class);
                 break;
             case "3":
-                ReturnMenu.execute(library, scanner);
+                ReturnMenu.execute(library, scanner, Book.class);
                 break;
             case "4":
+                ShowItems.execute(library, Movie.class);
+                MainMenu.execute(library, scanner);
+                break;
+            case "5":
+                CheckoutMenu.execute(library, scanner, Movie.class);
+                break;
+            case "6":
                 System.out.println("Bye!");
                 break;
             default:

@@ -5,32 +5,33 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Biblioteca {
-    private List<Book> books;
+    private List<Item> items;
 
     public Biblioteca() {
-        this.books = new ArrayList<Book>();
+        this.items = new ArrayList<Item>();
     }
 
-    public void addBook(Book book) {
-        this.books.add(book);
+    public void addItem(Item item) {
+        this.items.add(item);
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<? extends Item> getItems() {
+        return items;
     }
 
-    public List<Book> availableBooks() {
-        return this.findAll("", false);
+    public List<? extends Item> availableItems() {
+        return this.findAll("", false, null);
     }
 
-    public List<Book> unAvailableBooks() {
-        return this.findAll("", true);
+    public List<? extends Item> unAvailableItems() {
+        return this.findAll("", true, null);
     }
 
-    public List<Book> findAll(String query, boolean borrowed) {
-        return this.books.stream()
-                         .filter(book -> book.getBorrowed() == borrowed)
-                         .filter(book -> book.getTitle().toLowerCase().contains(query))
+    public List<? extends Item> findAll(String query, boolean borrowed, Class<? extends Item> type) {
+        return this.items.stream()
+                         .filter(item -> type == null || type.isInstance(item))
+                         .filter(item -> item.getBorrowed() == borrowed)
+                         .filter(item -> item.getTitle().toLowerCase().contains(query))
                          .collect(Collectors.toList());
     }
 }

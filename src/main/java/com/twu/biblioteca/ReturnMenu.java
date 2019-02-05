@@ -4,22 +4,22 @@ import java.util.Scanner;
 import java.util.List;
 
 public class ReturnMenu {
-    public static void execute(Biblioteca library, Scanner scanner) {
+    public static void execute(Biblioteca library, Scanner scanner, Class<? extends Item> type) {
         System.out.println("Type the name of the book you want to return.");
 
         if (!scanner.hasNext()) return;
 
         String query = scanner.next();
 
-        List<Book> bookList = library.findAll(query, true);
+        List<? extends Item> bookList = library.findAll(query, true, type);
 
-        String result = Book.formatBooks(bookList);
+        String result = Book.formatItems(bookList);
 
         System.out.println(result);
 
         if (bookList.size() == 1) {
             System.out.println();
-            bookList.get(0).returnBook();
+            bookList.get(0).returnItem();
             System.out.println("Thank you for returning the book!");
             MainMenu.goBack(library, scanner);
         } else if (bookList.size() == 0) {
@@ -28,7 +28,7 @@ public class ReturnMenu {
         } else {
             System.out.println();
             System.out.println("Be more specific, there are " + bookList.size() + " results.");
-            ReturnMenu.execute(library, scanner);
+            ReturnMenu.execute(library, scanner, type);
         }
     }
 }
