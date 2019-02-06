@@ -4,8 +4,8 @@ public class Movie extends Item {
     private String director;
     private String rating;
 
-    public Movie(String director, String rating, String title, String year, Boolean borrowed) {
-        super(title, year, borrowed);
+    public Movie(String director, String rating, String title, String year, User user) {
+        super(title, year, user);
         this.director = director;
         this.rating = rating;
     }

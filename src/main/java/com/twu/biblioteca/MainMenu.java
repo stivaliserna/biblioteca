@@ -6,12 +6,22 @@ import java.util.List;
 public class MainMenu {
     public static void execute(Biblioteca library, Scanner scanner) {
         System.out.println("Select an option:");
+        System.out.println();
+        System.out.println("Books:");
+        System.out.println();
         System.out.println("  1) List all books");
         System.out.println("  2) Checkout a book");
         System.out.println("  3) Return a book");
+        System.out.println();
+        System.out.println("Movies:");
+        System.out.println();
         System.out.println("  4) List all movies");
         System.out.println("  5) Checkout a movie");
-        System.out.println("  6) Quit");
+        System.out.println();
+        System.out.println("Account");
+        System.out.println();
+        System.out.println("  6) Account");
+        System.out.println("  7) Quit");
 
         if (!scanner.hasNext()) return;
 
@@ -34,6 +44,9 @@ public class MainMenu {
                 CheckoutMenu.execute(library, scanner, Movie.class);
                 break;
             case "6":
+                LoginMenu.execute(library, scanner);
+                break;
+            case "7":
                 System.out.println("Bye!");
                 break;
             default:
@@ -43,7 +56,7 @@ public class MainMenu {
     }
 
     public static void showItems(Biblioteca library, Class<? extends Item> type) {
-        List<? extends Item> kek = library.findAll("", false, type);
+        List<? extends Item> kek = library.findAll("", true, type);
         System.out.println(Item.formatItems(kek));
         System.out.println();
     }

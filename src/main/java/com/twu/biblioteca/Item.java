@@ -5,28 +5,32 @@ import java.util.List;
 public class Item {
     String title;
     String year;
-    Boolean borrowed;
+    User borrower;
 
-    public Item(String title, String year, Boolean borrowed) {
+    public Item(String title, String year, User user) {
         this.title = title;
         this.year = year;
-        this.borrowed = false;
+        this.borrower = user;
+    }
+
+    public User getBorrower() {
+        return borrower;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Boolean getBorrowed() {
-        return borrowed;
+    public Boolean isAvailable() {
+        return this.borrower == null;
     }
 
-    public void checkoutItem() {
-        this.borrowed = true;
+    public void checkoutItem(User user) {
+        this.borrower = user;
     }
 
     public void returnItem() {
-        this.borrowed = false;
+        this.borrower = null;
     }
 
     public static String formatItems(List<? extends Item> items) {
