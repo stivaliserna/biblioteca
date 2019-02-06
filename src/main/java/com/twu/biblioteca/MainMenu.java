@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
+
 import java.util.Scanner;
+import java.util.List;
 
 public class MainMenu {
     public static void execute(Biblioteca library, Scanner scanner) {
@@ -15,7 +17,7 @@ public class MainMenu {
 
         switch (scanner.next()) {
             case "1":
-                ShowItems.execute(library, Book.class);
+                showItems(library, Book.class);
                 MainMenu.execute(library, scanner);
                 break;
             case "2":
@@ -25,7 +27,7 @@ public class MainMenu {
                 ReturnMenu.execute(library, scanner, Book.class);
                 break;
             case "4":
-                ShowItems.execute(library, Movie.class);
+                showItems(library, Movie.class);
                 MainMenu.execute(library, scanner);
                 break;
             case "5":
@@ -38,6 +40,12 @@ public class MainMenu {
                 System.out.println("Wrong option! Please select a valid one.");
                 MainMenu.execute(library, scanner);
         }
+    }
+
+    public static void showItems(Biblioteca library, Class<? extends Item> type) {
+        List<? extends Item> kek = library.findAll("", false, type);
+        System.out.println(Item.formatItems(kek));
+        System.out.println();
     }
 
     public static void goBack(Biblioteca library, Scanner scanner) {
