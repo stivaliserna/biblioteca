@@ -44,24 +44,17 @@ public class AppTest {
         String[] lines = getOutputLines();
 
         assertEquals("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore.", lines[0]);
-        assertEquals("Select an option:", lines[2]);
-        assertEquals("  1) List all books", lines[3]);
-        assertEquals("  2) Checkout a book", lines[4]);
-        assertEquals("  3) Return a book", lines[5]);
-        assertEquals("  4) List all movies", lines[6]);
-        assertEquals("  5) Checkout a movie", lines[7]);
-        assertEquals("  6) Quit", lines[8]);
     }
 
     @Test public void testBookList() {
-        setInput("1");
+        Biblioteca library = new Biblioteca();
+        library.addItem(new Book("Lisa Halliday", "Asymmetry", "2018", null));
 
-        App.main(new String[0]);
+        MainMenu.showItems(library, Book.class);
 
         String[] lines = getOutputLines();
 
-        assertEquals("Asymmetry | Lisa Halliday | 2018", lines[lines.length - 10]);
-        assertEquals("The Great Believers | Rebecca Makkai | 2018", lines[lines.length - 9]);
+        assertEquals("Asymmetry | Lisa Halliday | 2018", lines[1]);
     }
 
     @Test public void testInvalidOption() {
@@ -71,123 +64,17 @@ public class AppTest {
 
         String[] lines = getOutputLines();
 
-        assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 8]);
+        assertEquals("Wrong option! Please select a valid one.", lines[lines.length - 19]);
     }
 
     @Test public void testQuitOption() {
-        setInput("6");
+        setInput("7");
 
         App.main(new String[0]);
 
         String[] lines = getOutputLines();
 
         assertEquals("Bye!", lines[lines.length - 1]);
-    }
-
-    @Test public void testCheckoutMenu() {
-        setInput(
-            "2" +
-            ENTER +
-            "asy" +
-            ENTER +
-            "Y"
-        );
-
-        App.main(new String[0]);
-
-        String[] lines = getOutputLines();
-
-        assertEquals("  6) Quit", lines[lines.length - 1]);
-    }
-
-    @Test public void testCheckoutSuccessMessage() {
-        setInput(
-            "2" +
-            ENTER +
-            "asy"
-        );
-
-        App.main(new String[0]);
-
-        String[] lines = getOutputLines();
-
-        assertEquals("Thank you! Enjoy the item.", lines[lines.length - 3]);
-    }
-
-    @Test public void testCheckoutUnsuccessfulMessage() {
-        setInput(
-            "2" +
-            ENTER +
-            "asy" +
-            ENTER +
-            "Y" +
-            ENTER +
-            "2" +
-            ENTER +
-            "asy"
-        );
-
-        App.main(new String[0]);
-
-        String[] lines = getOutputLines();
-
-        assertEquals("Sorry, that item is not available!", lines[lines.length - 3]);
-    }
-
-    @Test public void testReturnMenu() {
-        setInput(
-            "2" +
-            ENTER +
-            "asy" +
-            ENTER +
-            "Y" +
-            ENTER +
-            "3" +
-            ENTER +
-            "asy" +
-            ENTER +
-            "Y"
-        );
-
-        App.main(new String[0]);
-
-        String[] lines = getOutputLines();
-
-        assertEquals("  6) Quit", lines[lines.length - 1]);
-    }
-
-    @Test public void testReturnSuccessMessage() {
-        setInput(
-            "2" +
-            ENTER +
-            "asy" +
-            ENTER +
-            "Y" +
-            ENTER +
-            "3" +
-            ENTER +
-            "asy"
-        );
-
-        App.main(new String[0]);
-
-        String[] lines = getOutputLines();
-
-        assertEquals("Thank you for returning the book!", lines[lines.length - 3]);
-    }
-
-    @Test public void testReturnUnsuccessfulMessage() {
-        setInput(
-            "3" +
-            ENTER +
-            "hue"
-        );
-
-        App.main(new String[0]);
-
-        String[] lines = getOutputLines();
-
-        assertEquals("That is not a valid book to return.", lines[lines.length - 3]);
     }
 
     @Test public void testMovieList() {
@@ -197,7 +84,7 @@ public class AppTest {
 
         String[] lines = getOutputLines();
 
-        assertEquals("The Silence of the Lambs | Jonathan Demme | 1991 | 10", lines[lines.length - 10]);
-        assertEquals("Roma | Alfonso Cuarón | 2018 | 9", lines[lines.length - 9]);
+        assertEquals("The Silence of the Lambs | Jonathan Demme | 1991 | 10", lines[lines.length - 20]);
+        assertEquals("Roma | Alfonso Cuarón | 2018 | 9", lines[lines.length - 19]);
     }
 }

@@ -57,6 +57,10 @@ public class Biblioteca {
         return this.loggedUser;
     }
 
+    public String getUserInfo() {
+        return this.loggedUser.toString();
+    }
+
     public void logout() {
         this.loggedUser = null;
     }

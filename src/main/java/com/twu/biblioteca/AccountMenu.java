@@ -9,8 +9,9 @@ public class AccountMenu {
         System.out.println("Select an option:");
         System.out.println();
         System.out.println("  1) List my checked out books");
-        System.out.println("  2) Logout");
-        System.out.println("  3) Main menu");
+        System.out.println("  2) View my info");
+        System.out.println("  3) Logout");
+        System.out.println("  4) Main menu");
 
         if (!scanner.hasNext()) return;
 
@@ -20,13 +21,19 @@ public class AccountMenu {
                 AccountMenu.execute(library, scanner);
                 break;
             case "2":
-                library.logout();
+                System.out.println(library.getUserInfo());
+                AccountMenu.execute(library, scanner);
                 break;
             case "3":
+                library.logout();
+                MainMenu.execute(library, scanner);
+                break;
+            case "4":
                 MainMenu.execute(library, scanner);
                 break;
             default:
                 System.out.println("Wrong option! Please select a valid one.");
+                System.out.println();
                 MainMenu.execute(library, scanner);
         }
     }

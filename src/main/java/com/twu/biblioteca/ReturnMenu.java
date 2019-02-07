@@ -12,7 +12,7 @@ public class ReturnMenu {
     
             String query = scanner.next();
     
-            List<? extends Item> bookList = library.findAll(query, true, type);
+            List<? extends Item> bookList = library.findAll(query, false, type);
     
             String result = Book.formatItems(bookList);
     

@@ -51,6 +51,7 @@ public class MainMenu {
                 break;
             default:
                 System.out.println("Wrong option! Please select a valid one.");
+                System.out.println();
                 MainMenu.execute(library, scanner);
         }
     }
